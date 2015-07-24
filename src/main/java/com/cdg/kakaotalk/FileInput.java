@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FileInput {
 
-	private List<String> list = new ArrayList<String>();
+	private List<String> lineList = new ArrayList<String>();
 	private String inputFile;
 
 	public FileInput(String inputFile) {
@@ -23,16 +23,16 @@ public class FileInput {
 			String line;
 
 			while ((line = bin.readLine()) != null) {
-				list.add(line);
+				lineList.add(line);
 			}
-			in.close();
 			bin.close();
+			in.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return list;
+		return lineList;
 	}
 
 }
