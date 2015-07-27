@@ -1,27 +1,27 @@
 package com.cdg.kakaotalk;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class People {
 
 	private String name;
-	private Word word;
+	private Word word = new Word();
+
+	private Map<String, Integer> map = new HashMap<String, Integer>();
 
 	public People(String name) {
 		this.name = name;
-		
-		word = new Word();
 	}
 
-	public void calculate(String s) {
+	public void add(String s) {
 
 		word.add(s);
-
+		map = word.getMap();
+		
 	}
 
-	public void print() {
-		System.out.println(name);
-		word.print();
-	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -30,12 +30,12 @@ public class People {
 		this.name = name;
 	}
 
-	public Word getWord() {
-		return word;
+	public Map<String, Integer> getMap() {
+		return map;
 	}
 
-	public void setWord(Word word) {
-		this.word = word;
+	public void setMap(Map<String, Integer> map) {
+		this.map = map;
 	}
 
 }
