@@ -7,9 +7,7 @@ public class Time {
 
 	private Map<String, Integer> map = new HashMap<String, Integer>();
 
-	public void add(String s) {
-
-		s = s.substring(1, s.indexOf(":"));
+	public void analyze(String s) {
 
 		if (map.containsKey(s)) {
 			int count = map.get(s);

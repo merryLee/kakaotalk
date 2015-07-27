@@ -14,7 +14,7 @@ public class People {
 		this.name = name;
 	}
 
-	public void add(String s) {
+	public void analyze(String s) {
 
 		word.add(s);
 		map = word.getMap();

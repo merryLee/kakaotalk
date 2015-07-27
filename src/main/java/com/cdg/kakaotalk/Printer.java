@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class FileOutput {
+public class Printer {
 
 	public void timePrint(Map<String, Integer> map) {
 

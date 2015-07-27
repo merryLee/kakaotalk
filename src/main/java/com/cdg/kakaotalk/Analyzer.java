@@ -6,21 +6,18 @@ import java.util.List;
 
 public class Analyzer {
 
-	private FileInput fileInput;
-	private FileOutput fileOutput = new FileOutput();
-	private List<String> lineList = new ArrayList<String>();
-
+	private Printer printer = new Printer();
+	private List<String> lineList;
+	
 	Time time = new Time();
-	People people1 = new People("이선민");
-	People people2 = new People("임승한");
+	ArrayList<People> peopleList = new ArrayList<People>();
+	ArrayList<String> nameList = new ArrayList<String>();
 
 	public Analyzer(FileInput fileInput) {
-		this.fileInput = fileInput;
+		this.lineList = fileInput.read();
 	}
 
 	public void distribute() {
-
-		lineList = fileInput.read();
 
 		Iterator<String> it = lineList.listIterator();
 
@@ -29,25 +26,44 @@ public class Analyzer {
 			String str = (String) it.next();
 
 			if (str.length() == 0 || str.charAt(0) != '[') {
-				// System.out.println(str);
 				continue;
 			}
 
 			String[] sp = str.split("] ", 3);
 
 			String name = sp[0].substring(1);
-			time.add(sp[1]);
-			if (people1.getName().equals(name)) {
-				people1.add(sp[2]);
-			} else {
-				people2.add(sp[2]);
+			
+			addTime(sp[1]);
+			createPeople(name);
+			addMessage(sp[2], name);
+		} // while
+	}
+
+	private void addTime(String sp1) {
+		String t = sp1.substring(1, sp1.indexOf(":"));
+		time.analyze(t);
+	}
+
+	private void createPeople(String name) {
+		if (!nameList.contains(name)) {
+			nameList.add(name);
+			peopleList.add(new People(name));
+		}
+	}
+
+	private void addMessage(String sp2, String name) {
+		for (People people : peopleList) {
+			if (people.getName().equals(name)) {
+				people.analyze(sp2);
 			}
 		}
 	}
 
 	public void print() {
-		fileOutput.timePrint(time.getMap());
-		fileOutput.peoplePrint(people1.getName(), people1.getMap());
-		fileOutput.peoplePrint(people2.getName(), people2.getMap());
+		printer.timePrint(time.getMap());
+
+		for (People people : peopleList) {
+			printer.peoplePrint(people.getName(), people.getMap());
+		}
 	}
 }
