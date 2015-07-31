@@ -1,6 +1,5 @@
 package com.cdg.kakaotalk;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class People {
@@ -8,7 +7,7 @@ public class People {
 	private String name;
 	private Word word = new Word();
 
-	private Map<String, Integer> map = new HashMap<String, Integer>();
+	private Map<String, Integer> map;
 
 	public People(String name) {
 		this.name = name;
@@ -18,10 +17,9 @@ public class People {
 
 		word.add(s);
 		map = word.getMap();
-		
+
 	}
 
-	
 	public String getName() {
 		return name;
 	}

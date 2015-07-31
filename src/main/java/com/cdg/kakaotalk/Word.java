@@ -12,20 +12,23 @@ public class Word {
 
 	public void add(String s) {
 
-		String[] sp = s.split(" ");		// sp = "사진 안녕 등등등"
+		String[] sp = s.split(" "); 		// sp는 대화문장.
 
 		for (int i = 0; i < sp.length; i++) {
 
-			if (map.containsKey(sp[i])) {
-				int count = map.get(sp[i]);
-				map.replace(sp[i], ++count);
-			} else {
-				map.put(sp[i], 1);
-			}
-		}
+			if (!sp[i].equals("")) {		// 빈값 추가 제외.
+
+				if (map.containsKey(sp[i])) {
+					int count = map.get(sp[i]);
+					map.replace(sp[i], ++count);
+				} else {
+					map.put(sp[i], 1);
+				}
+
+			} //if
+		} //for
 	}
 
-	
 	public Map<String, Integer> getMap() {
 		return map;
 	}

@@ -33,10 +33,14 @@ public class Printer {
 
 		Iterator it = list.iterator();
 
-		for (int i = 0; i < 3; i++) {
-			String str = it.next().toString();
-			buffer.append((i + 1) + ". ");
-			buffer.append(str.substring(0, str.indexOf("=")) + "\n");
+		for (int i = 0; i < 3; i++) {		//3순위까지 출력.
+
+			if (it.hasNext()) {
+				String str = it.next().toString();
+				buffer.append((i + 1) + ". ");
+				buffer.append(str.substring(0, str.indexOf("=")) + "\n");
+			}
+
 		}
 
 		System.out.println(buffer);

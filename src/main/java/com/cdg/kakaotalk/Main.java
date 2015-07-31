@@ -7,10 +7,9 @@ public class Main {
 	public static void main(String[] args) {
 
 		FileInput fileInput = new FileInput(INPUT_FILE);
-		Analyzer analyzer = new Analyzer(fileInput);
+		Analyzer analyzer = new Analyzer();
 
-		analyzer.distribute();
-		analyzer.print();
+		analyzer.start(fileInput.read());
 
 	}
 
