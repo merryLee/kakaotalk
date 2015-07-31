@@ -10,35 +10,56 @@ import java.util.Set;
 
 public class Printer {
 
-	public void timePrint(Map<String, Integer> map) {
+	public void printTime(Map<String, Integer> map) {
 
-		Set set = map.entrySet();
-		List list = new ArrayList(set);
-		Collections.sort(list, new ValueComparator());
+		StringBuffer buffer = new StringBuffer();
+		List list = sortMap(map);
 
 		Iterator it = list.iterator();
 		String str = it.next().toString();
-		System.out.println("가방많이 대화하는 시간대: " + str);
 
+		buffer.append("가장 많이 대화하는 시간대: ");
+		buffer.append(str.substring(0, str.indexOf("=")) + "시\n");
+
+		System.out.println(buffer);
 	}
 
-	public void peoplePrint(String name, Map<String, Integer> map) {
+	public void printPeople(ArrayList<People> peopleList) {
 
-		Set set = map.entrySet();
-		List list = new ArrayList(set);
-		Collections.sort(list, new ValueComparator());
-
-		System.out.println(name);
-
-		Iterator it = list.iterator();
-
-		for (int i = 0; i < 3; i++) {
-			String str = it.next().toString();
-			System.out.println(str);
+		for (People people : peopleList) {
+			printPerson(people.getName(), people.getMap());
 		}
 	}
 	
-	
+	private void printPerson(String name, Map<String, Integer> map) {
+
+		StringBuffer buffer = new StringBuffer();
+		List list = sortMap(map);
+
+		buffer.append(name + "\n");
+
+		Iterator it = list.iterator();
+
+		for (int i = 0; i < 3; i++) { // 3순위까지 출력.
+
+			if (it.hasNext()) {
+				String str = it.next().toString();
+				buffer.append((i + 1) + ". ");
+				buffer.append(str.substring(0, str.indexOf("=")) + "\n");
+			}
+
+		}
+
+		System.out.println(buffer);
+	}
+
+	private List sortMap(Map<String, Integer> map) {
+		Set set = map.entrySet();
+		List list = new ArrayList(set);
+		Collections.sort(list, new ValueComparator());
+		return list;
+	}
+
 	static class ValueComparator implements Comparator {
 		public int compare(Object o1, Object o2) {
 			if (o1 instanceof Map.Entry && o2 instanceof Map.Entry) {

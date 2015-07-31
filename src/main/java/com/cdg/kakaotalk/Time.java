@@ -15,9 +15,9 @@ public class Time {
 		} else {
 			map.put(s, 1);
 		}
+		
 	}
 
-	
 	public Map<String, Integer> getMap() {
 		return map;
 	}
