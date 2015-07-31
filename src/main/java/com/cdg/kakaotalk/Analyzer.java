@@ -29,11 +29,9 @@ public class Analyzer {
 
 			if (str.length() == 0) { 		// 공백이면 continue;
 				continue;
-			} else if (isDate(str)) {		// 날짜면 continue;
+			} else if (isDate(str)) { 		// 날짜면 continue;
 				continue;
-			} else if (str.length() != 0 && str.charAt(0) != '[') { 	// 줄바꿈되어 메시지만 있을 경우.
-				addMessage(str, prevName);
-			} else {						// '[이름] [시간] 메시지' 분리.
+			} else { 			// '[이름] [시간] 메시지' 분리.
 				distribute(str);
 			}
 
@@ -55,15 +53,21 @@ public class Analyzer {
 	}
 
 	private void distribute(String str) {
+	
+		try {
+			String[] sp = str.split("] ", 3);
 
-		String[] sp = str.split("] ", 3);
+			String name = sp[0].substring(1);
 
-		String name = sp[0].substring(1);
-		prevName = name;
+			addTime(sp[1]);
+			createPeople(name);
+			addMessage(sp[2], name);
 
-		addTime(sp[1]);
-		createPeople(name);
-		addMessage(sp[2], name);
+			prevName = name;
+
+		} catch (Exception e) {			// 메시지만 있는 경우.
+			addMessage(str, prevName);
+		}
 
 	}
 
