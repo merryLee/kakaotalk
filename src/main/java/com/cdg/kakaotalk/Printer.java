@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class Printer {
 
-	public void timePrint(Map<String, Integer> map) {
+	public void printTime(Map<String, Integer> map) {
 
 		StringBuffer buffer = new StringBuffer();
 		List list = sortMap(map);
@@ -24,7 +24,14 @@ public class Printer {
 		System.out.println(buffer);
 	}
 
-	public void peoplePrint(String name, Map<String, Integer> map) {
+	public void printPeople(ArrayList<People> peopleList) {
+
+		for (People people : peopleList) {
+			printPerson(people.getName(), people.getMap());
+		}
+	}
+	
+	private void printPerson(String name, Map<String, Integer> map) {
 
 		StringBuffer buffer = new StringBuffer();
 		List list = sortMap(map);
@@ -33,7 +40,7 @@ public class Printer {
 
 		Iterator it = list.iterator();
 
-		for (int i = 0; i < 3; i++) {		//3순위까지 출력.
+		for (int i = 0; i < 3; i++) { // 3순위까지 출력.
 
 			if (it.hasNext()) {
 				String str = it.next().toString();

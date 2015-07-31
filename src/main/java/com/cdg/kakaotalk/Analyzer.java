@@ -38,8 +38,9 @@ public class Analyzer {
 			}
 
 		}
-		
-		print();
+
+		printer.printTime(time.getMap());
+		printer.printPeople(peopleList);
 	}
 
 	private boolean isDate(String data) {
@@ -86,11 +87,4 @@ public class Analyzer {
 		}
 	}
 
-	public void print() {
-		printer.timePrint(time.getMap());
-
-		for (People people : peopleList) {
-			printer.peoplePrint(people.getName(), people.getMap());
-		}
-	}
 }
